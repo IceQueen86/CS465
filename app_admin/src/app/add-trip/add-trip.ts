@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Router } from "@angular/router";
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from "@angular/forms";
 
-import { Router } from "@angular/router";
 import { TripData } from '../services/trip-data';
+
 
 @Component({
   selector: 'app-add-trip',
@@ -12,15 +13,17 @@ import { TripData } from '../services/trip-data';
   templateUrl: './add-trip.html',
   styleUrl: './add-trip.css',
 })
+
 export class AddTrip implements OnInit {
-  addForm!: FormGroup;
+  public addForm!: FormGroup;
   submitted = false;
 
   constructor (
     private formBuilder: FormBuilder,
     private router: Router,
-    private tripService: TripData
+    private tripData: TripData
   ) {}
+  
   ngOnInit() {
     this.addForm = this.formBuilder.group({
       _id: [],
@@ -32,12 +35,12 @@ export class AddTrip implements OnInit {
       perPerson: ['', Validators.required],
       image: ['', Validators.required],
       description: ['', Validators.required],
-  })
+    })
   }
   public onSubmit() {
     this.submitted = true;
     if(this.addForm.valid){
-      this.tripService.addTrip(this.addForm.value)
+      this.tripData.addTrip(this.addForm.value)
       .subscribe( {
         next: (data: any) => {
           console.log(data);

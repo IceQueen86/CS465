@@ -6,9 +6,9 @@
   res.render("travel", { title: "Travlr Getaways", trips });
 }; */
 
-const tripsEndpoint = "http://localhost:3000/api/trips";
+const tripsEndpoint = 'http://localhost:3000/api/trips';
 const options = {
-  method: "GET",
+  method: 'GET',
   headers: {
     Accept: "application/json",
   },
@@ -22,7 +22,7 @@ const travel = async function (req, res, next) {
       //console.log(json);
       let message = null;
       if (!(json instanceof Array)){
-        message= "API Lookup error";
+        message= json;
         json=[];
       }else{
         if(!json.length){

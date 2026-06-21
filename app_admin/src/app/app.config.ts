@@ -1,12 +1,16 @@
-import { ApplicationConfig } from '@angular/core';
+import { ApplicationConfig, importProvidersFrom, Provider } from '@angular/core';
 import { provideRouter } from '@angular/router';
-import { provideHttpClient } from '@angular/common/http';
+import { HttpClient, provideHttpClient } from '@angular/common/http';
 
 import { routes } from './app.routes';
+import { authInterceptProvider } from './utils/jwt-interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(routes),
-    provideHttpClient()
+    provideHttpClient(),
+    importProvidersFrom(HttpClient),
+    authInterceptProvider
   ]
 };
+
